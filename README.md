@@ -11,7 +11,7 @@ https://stackoverflow.com/questions/41161076/adding-lombok-plugin-to-intellij-pr
 
 ## Run jar
 
-java -jar  AddressJson.jar
+java -jar  addressjson.jar
 
 Data to be entered by user:
 1) You will be prompted to enter the path and file name of the file you wish to use.
