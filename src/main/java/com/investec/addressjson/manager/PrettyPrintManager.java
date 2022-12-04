@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.investec.addressjson.pojo.Address;
+import com.investec.addressjson.pojo.Address.AddressLineDetails;
+import com.investec.addressjson.pojo.Address.CountryDetails;
+import com.investec.addressjson.pojo.Address.ProvinceOrStateDetails;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,7 +58,16 @@ public class PrettyPrintManager {
 	 */
 
 	private String getPrettyPrintAddressString(Address address) {
-		return address.toPrettyPrintString();
+		AddressLineDetails addressLineDetail = address.getAddressLineDetail();
+		ProvinceOrStateDetails provinceOrState = address.getProvinceOrState();
+		CountryDetails country = address.getCountry();
+		String addressLines = (addressLineDetail != null
+				? (addressLineDetail.getLine1() + " " + addressLineDetail.getLine2())
+				: " n/a");
+		String provinceOrStateStr = (provinceOrState != null ? provinceOrState.getName() : "n/a");
+		String countryStr = (country != null ? country.getName() : "n/a");
+		return String.format("%s: %s - %s - %s - %s - %s", address.getType().getName(), addressLines,
+				address.getCityOrTown(), provinceOrStateStr, address.getPostalCode(), countryStr);
 	}
 
 	/**
@@ -83,7 +95,29 @@ public class PrettyPrintManager {
 	 */
 
 	private String getValidatedAdddressString(Address address) {
-		return address.toValidatedString();
+		AddressLineDetails addressLineDetail = address.getAddressLineDetail();
+		ProvinceOrStateDetails provinceOrState = address.getProvinceOrState();
+		CountryDetails country = address.getCountry();
+		List<String> invalidAddressList = address.getInvalidAddressList();
+
+		String addressLines = (addressLineDetail != null
+				? (addressLineDetail.getLine1() + " " + addressLineDetail.getLine2())
+				: "n/a");
+		String provinceOrStateStr = (provinceOrState != null ? provinceOrState.getName() : "n/a");
+		String countryStr = (country != null ? country.getName() : "n/a");
+
+		String invalidMessage = "";
+		for (String invalidString : invalidAddressList) {
+			invalidMessage += String.format("%s \n", invalidString);
+		}
+
+		String validationStr = (address.getIsAddressValid() ? "Address is Valid"
+				: "Address is invalid because: \n" + invalidMessage);
+		String format = String.format("\n%s: \n %s \n %s \n %s \n %s \n %s \n%s", address.getType().getName(),
+				addressLines, address.getCityOrTown(), provinceOrStateStr, address.getPostalCode(), countryStr,
+				validationStr);
+		return format;
+
 	}
 
 }

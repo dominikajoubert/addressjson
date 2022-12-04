@@ -49,29 +49,5 @@ public class Address {
 		public String code;
 		public String name;
 	}
-	
-	public String toPrettyPrintString() {
-		String addressLines = (addressLineDetail!=null? (addressLineDetail.getLine1() + " " +addressLineDetail.getLine2()):" n/a");
-		String provinceOrStateStr = (provinceOrState!=null? provinceOrState.getName():"n/a");
-		String countryStr = (country!=null? country.getName():"n/a");		
-		return String.format("%s: %s - %s - %s - %s - %s", type.getName(), addressLines , cityOrTown, provinceOrStateStr, postalCode, countryStr );		
-	}
-	
-	public String toValidatedString() {
-		String addressLines = (addressLineDetail!=null? (addressLineDetail.getLine1() + " " +addressLineDetail.getLine2()):"n/a");
-		String provinceOrStateStr = (provinceOrState!=null? provinceOrState.getName():"n/a");
-		String countryStr = (country!=null? country.getName():"n/a");
-		
-		String invalidMessage = "";
-		for (String invalidString : invalidAddressList) {
-			invalidMessage += String.format("%s \n",invalidString);
-		}
-	
-		String validationStr = (isAddressValid ? "Address is Valid" : "Address is invalid because: \n"+invalidMessage);		
-		String format = String.format("\n%s: \n %s \n %s \n %s \n %s \n %s \n%s", type.getName(), addressLines , cityOrTown, provinceOrStateStr, postalCode, countryStr,validationStr );		
-		return format;
-	}
-	
-	
 
 }
