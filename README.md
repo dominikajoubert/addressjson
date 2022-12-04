@@ -9,6 +9,14 @@ git clone git@gitlab.com:investectestgroup/addressjson.git
 https://projectlombok.org/setup/intellij
 https://stackoverflow.com/questions/41161076/adding-lombok-plugin-to-intellij-project
 
+## To build project jar, run below
+
+gradle clean build
+
+## Jar built in below folder
+
+\addressjson\build\libs
+
 ## Run jar
 
 java -jar  addressjson.jar
