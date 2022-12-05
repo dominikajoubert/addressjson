@@ -1,8 +1,13 @@
 # AddressJson
 
-## Git Repo
+## Git Repo Clone https:
 
-git clone git@gitlab.com:investectestgroup/addressjson.git
+git clone https://github.com/dominikajoubert/addressjson.git
+
+## Git Repo Clone ssh:
+ssh clone (requires ssh key setup on user profile in github)
+git clone git@github.com:dominikajoubert/addressjson.git
+
 
 ## Adding Lombok to project in intelliJ if not already available.
 

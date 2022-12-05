@@ -66,8 +66,10 @@ public class PrettyPrintManager {
 				: " n/a");
 		String provinceOrStateStr = (provinceOrState != null ? provinceOrState.getName() : "n/a");
 		String countryStr = (country != null ? country.getName() : "n/a");
+		String cityTown = (address.getCityOrTown() != null ? address.getCityOrTown() : "n/a");
+		String postalCode = (address.getPostalCode() != null ? address.getPostalCode() : "n/a");
 		return String.format("%s: %s - %s - %s - %s - %s", address.getType().getName(), addressLines,
-				address.getCityOrTown(), provinceOrStateStr, address.getPostalCode(), countryStr);
+				cityTown, provinceOrStateStr, postalCode, countryStr);
 	}
 
 	/**
@@ -110,11 +112,12 @@ public class PrettyPrintManager {
 		for (String invalidString : invalidAddressList) {
 			invalidMessage += String.format("%s \n", invalidString);
 		}
-
+		String cityTown = (address.getCityOrTown() != null ? address.getCityOrTown() : "n/a");
+		String postalCode = (address.getPostalCode() != null ? address.getPostalCode() : "n/a");
 		String validationStr = (address.getIsAddressValid() ? "Address is Valid"
 				: "Address is invalid because: \n" + invalidMessage);
 		String format = String.format("\n%s: \n %s \n %s \n %s \n %s \n %s \n%s", address.getType().getName(),
-				addressLines, address.getCityOrTown(), provinceOrStateStr, address.getPostalCode(), countryStr,
+				addressLines, cityTown, provinceOrStateStr, postalCode, countryStr,
 				validationStr);
 		return format;
 
